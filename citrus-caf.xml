@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+
+  <remote  name="caf"
+           fetch="git://codeaurora.org/quic/la"
+           review="codeaurora.org" />
+  <default remote="caf"
+           revision="LA.BR.1.3.7_rb1.3"
+           sync-j="4" />
+
+  <remote  name="ctr"
+           fetch="https://github.com/Citrus-CAF"
+           revision="o8x-8952" />
+
+  <remote  name="github"
+           fetch="https://github.com/" />
+
+<!-- Include repo's to sync from CODEAURORA -->
+  <include name="codeaurora.xml" />
+
+<!-- Begin Citrus-CAF Additions -->
+  <remove-project name="platform/build"/>
+  <project name="build" path="build/make" remote="ctr">
+    <copyfile dest="Makefile" src="core/root.mk"/>
+    <linkfile dest="build/CleanSpec.mk" src="CleanSpec.mk"/>
+    <linkfile dest="build/buildspec.mk.default" src="buildspec.mk.default"/>
+    <linkfile dest="build/core" src="core"/>
+    <linkfile dest="build/envsetup.sh" src="envsetup.sh"/>
+    <linkfile dest="build/target" src="target"/>
+    <linkfile dest="build/tools" src="tools"/>
+  </project>
+  <remove-project name="platform/build/kati" />
+  <project name="build_kati" path="build/kati" remote="ctr"/>
+  <remove-project name="platform/build/soong"/>
+  <project name="build_soong" path="build/soong" remote="ctr">
+    <linkfile dest="Android.bp" src="root.bp"/>
+    <linkfile dest="bootstrap.bash" src="bootstrap.bash"/>
+  </project>
+  <remove-project name="platform/bootable/recovery" />
+  <project name="bootable_recovery" path="bootable/recovery" remote="ctr"/>
+  <remove-project name="platform/bionic"/>
+  <project name="bionic" path="bionic" remote="ctr"/>
+  <remove-project name="device/qcom/common"/>
+  <project name="device_qcom_common" path="device/qcom/common" remote="ctr"/>
+
+<!-- External -->
+  <remove-project name="platform/external/selinux"/>
+  <project name="external_selinux" path="external/selinux" remote="ctr"/>
+
+<!-- Frameworks -->
+  <remove-project name="platform/frameworks/base"/>
+  <project name="frameworks_base" path="frameworks/base" remote="ctr"/>
+
+<!--  HALS -->
+  <remove-project name="platform/hardware/qcom/audio"/>
+  <project name="hardware_qcom_audio" path="hardware/qcom/audio" remote="ctr"/>
+  <remove-project name="platform/hardware/qcom/display"/>
+  <project name="hardware_qcom_display" path="hardware/qcom/display" remote="ctr"/>
+  <remove-project name="platform/hardware/qcom/media"/>
+  <project name="hardware_qcom_media" path="hardware/qcom/media" remote="ctr"/>
+
+<!-- Hardware -->
+  <remove-project name="platform/hardware/libhardware"/>
+  <project name="hardware_libhardware" path="hardware/libhardware" remote="ctr"/>
+
+<!-- Apps -->
+  <remove-project name="platform/packages/inputmethods/LatinIME"/>
+  <project name="packages_inputmethods_LatinIME" path="packages/inputmethods/LatinIME" remote="ctr"/>
+  <remove-project name="platform/packages/apps/Settings"/>
+  <project name="packages_apps_Settings" path="packages/apps/Settings" remote="ctr"/>
+
+<!-- Providers -->
+  <remove-project name="platform/packages/providers/MediaProvider"/>
+  <project name="packages_providers_MediaProvider" path="packages/providers/MediaProvider" remote="ctr"/>
+
+<!-- System -->
+  <remove-project name="platform/system/core"/>
+  <project name="system_core" path="system/core" remote="ctr"/>
+  <remove-project name="platform/system/vold"/>
+  <project name="system_vold" path="system/vold" remote="ctr"/>
+
+<!-- Vendor -->
+  <project name="vendor_citrus" path="vendor/citrus" remote="ctr" revision="o8x">
+    <copyfile src="build/makelemonade.sh" dest="makelemonade.sh"/>
+  </project>
+  <remove-project name="platform/vendor/codeaurora/telephony"/>
+  <project name="vendor_codeaurora_telephony" path="vendor/codeaurora/telephony" remote="ctr"/>
+  <remove-project name="platform/system/qcom"/>
+  <project name="vendor_qcom_opensource_softap" path="vendor/qcom/opensource/softap" remote="ctr"/>
+
+<!-- Remove this bloats -->
+  <remove-project name="device/common"/>
+  <remove-project name="device/generic/arm64"/>
+  <remove-project name="device/generic/armv7-a-neon"/>
+  <remove-project name="device/generic/common"/>
+  <remove-project name="device/generic/goldfish"/>
+  <remove-project name="device/generic/mini-emulator-arm64"/>
+  <remove-project name="device/generic/mini-emulator-armv7-a-neon"/>
+  <remove-project name="device/generic/mini-emulator-x86"/>
+  <remove-project name="device/generic/mini-emulator-x86_64"/>
+  <remove-project name="device/generic/qemu"/>
+  <remove-project name="device/generic/x86"/>
+  <remove-project name="device/generic/x86_64"/>
+  <remove-project name="device/google/accessory/arduino"/>
+  <remove-project name="device/google/accessory/demokit"/>
+  <remove-project name="device/google/atv"/>
+  <remove-project name="device/google/contexthub"/>
+  <remove-project name="device/sample"/>
+  <remove-project name="kernel/lk" />
+  <remove-project name="kernel/msm-3.10"/>
+  <remove-project name="platform/vendor/nxp/opensource/packages/apps/Nfc"/>
+  <remove-project name="platform/vendor/qcom-opensource/fm" />
+  <remove-project name="platform/vendor/qcom-opensource/wlan/prima"/>
+  <remove-project name="platform/vendor/qcom-opensource/wlan/utils/sigma-dut"/>
+
+</manifest>
